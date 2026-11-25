@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#08080a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>SAVORA | Alta Cocina Contemporánea & Fuego de Autor</title>
+  <meta name="description" content="Experiencia gastronómica de alta categoría exclusiva para dispositivos móviles. Cortes madurados, cocina a fuego vivo y mixología de autor." />
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos móviles principales -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Contenedor optimizado exclusivamente para móviles -->
+  <div class="mobile-device-wrapper">
+
+    <!-- Indicador de teléfono cuando se previsualiza en computadoras -->
+    <div class="desktop-device-indicator">
+      <span>9:41</span>
+      <div class="notch-pill"></div>
+      <div style="display: flex; gap: 5px; align-items: center;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20h.01M2 8.5a16 16 0 0 1 20 0M5 12.5a12 12 0 0 1 14 0M8.5 16.5a7 7 0 0 1 7 0"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
+      </div>
+    </div>
+
+    <!-- Header superior de la aplicación móvil -->
+    <header class="mobile-app-header">
+      <div class="header-brand" onclick="app.switchTab('home')" style="cursor: pointer;">
+        <span class="header-logo-title">SAVORA</span>
+        <span class="header-logo-sub">Alta Cocina & Fuego</span>
+      </div>
+
+      <div class="header-actions">
+        <!-- Botón de favoritos en header -->
+        <button class="header-icon-btn" aria-label="Ver favoritos" onclick="app.switchTab('favorites')">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+          <span class="badge-count" id="headerFavBadge" style="display: none;">0</span>
+        </button>
+
+        <!-- Botón de carrito en header -->
+        <button class="header-icon-btn" aria-label="Abrir carrito de compras" onclick="app.openCart()">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="badge-count" id="headerCartBadge" style="display: none;">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Notificaciones Toast flotantes -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Contenido principal interactivo según pestaña activa -->
+    <main class="app-content" id="appContent">
+
+      <!-- ====================================================================
+           PESTAÑA 1: INICIO (HOME)
+           ==================================================================== -->
+      <section class="tab-view active" id="view-home">
+
+        <!-- Portada Hero móvil impactante -->
+        <div class="hero-section">
+          <div class="hero-bg-media">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=85" alt="Platillo de autor SAVORA" />
+          </div>
+          <div class="hero-gradient-overlay"></div>
+
+          <div class="hero-content">
+            <span class="hero-tag">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+              Experiencia Gastronómica
+            </span>
+            <h1 class="hero-title">SAVORA</h1>
+            <p class="hero-slogan">Donde la técnica milenaria, el fuego vivo y la sofisticación culinaria despiertan tus sentidos.</p>
+            
+            <div class="hero-actions">
+              <button class="btn-primary-gold" onclick="app.switchTab('menu')">
+                <span>Explorar Menú</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+              <button class="btn-secondary-outline" onclick="app.switchTab('menu')">
+                <span>Ordenar Ahora</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Pilares de Excelencia -->
+        <div class="hero-features-bar">
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <span>Fuego a Leña</span>
+          </div>
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <span>Wagyu & Dry-Aged</span>
+          </div>
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Empaque Térmico</span>
+          </div>
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Pedido Directo</span>
+          </div>
+        </div>
+
+        <!-- Sección de Promociones Especiales -->
+        <section class="promos-section" style="margin-top: 10px;">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="section-subtitle">Privilegios Culinarios</span>
+              <h2 class="section-title">Promociones de Temporada</h2>
+            </div>
+            <button class="section-link" onclick="app.switchTab('menu')">
+              <span>Ver todas</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Carrusel deslizable -->
+          <div class="promos-carousel" id="promosCarousel"></div>
+        </section>
+
+        <!-- Destacados de la Carta -->
+        <section style="margin-top: 26px;">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="section-subtitle">Selección del Chef</span>
+              <h2 class="section-title">Creaciones Emblemáticas</h2>
+            </div>
+            <button class="section-link" onclick="app.switchTab('menu')">
+              <span>Menú completo</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Mini catálogo destacado en inicio -->
+          <div style="padding: 0 18px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="cart-item-row" style="cursor: pointer;" onclick="app.openProductModal('ham-1')">
+              <img class="cart-item-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" alt="Wagyu Imperial" />
+              <div class="cart-item-details">
+                <div class="cart-item-header">
+                  <h4 class="cart-item-name">SAVORA Wagyu Imperial Gold</h4>
+                  <span style="font-size: 0.72rem; color: var(--gold-light); font-weight: 700;">5.0 ★</span>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-cream-muted); margin-top: 3px;">220g Wagyu A5 a las brasas, queso Comté, trufa negra y brioche.</p>
+                <div class="cart-item-bottom">
+                  <span class="cart-item-price">$495</span>
+                  <button class="btn-card-add" style="padding: 6px 14px; font-size: 0.75rem;" onclick="event.stopPropagation(); app.quickAddToCart('ham-1')">
+                    + Ordenar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="cart-item-row" style="cursor: pointer;" onclick="app.openProductModal('pri-1')">
+              <img class="cart-item-img" src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=500&q=80" alt="Tomahawk" />
+              <div class="cart-item-details">
+                <div class="cart-item-header">
+                  <h4 class="cart-item-name">Ojo de Bife Tomahawk Madurado</h4>
+                  <span style="font-size: 0.72rem; color: var(--gold-light); font-weight: 700;">5.0 ★</span>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-cream-muted); margin-top: 3px;">600g añejado 45 días a leña de nogal con mantequilla de romero.</p>
+                <div class="cart-item-bottom">
+                  <span class="cart-item-price">$1,180</span>
+                  <button class="btn-card-add" style="padding: 6px 14px; font-size: 0.75rem;" onclick="event.stopPropagation(); app.quickAddToCart('pri-1')">
+                    + Ordenar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reseñas de Clientes y Críticos -->
+        <section class="reviews-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="section-subtitle">Voz de los Comensales</span>
+              <h2 class="section-title">Críticas & Reconocimientos</h2>
+            </div>
+          </div>
+          <div class="reviews-carousel-mobile" id="reviewsCarousel"></div>
+        </section>
+
+        <!-- Banner teaser de Historia & Chef -->
+        <div style="padding: 10px 18px 20px;">
+          <div style="background: var(--bg-card); border: 1px solid var(--gold-border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+            <div style="position: relative; height: 160px;">
+              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Cocina a fuego vivo SAVORA" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg-card) 10%, rgba(0,0,0,0.3) 100%);"></div>
+              <span style="position: absolute; bottom: 12px; left: 14px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: var(--gold-light); letter-spacing: 1px;">Filosofía Gastronómica</span>
+            </div>
+            <div style="padding: 16px;">
+              <h3 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-cream-light); margin-bottom: 6px;">El Alma de SAVORA</h3>
+              <p style="font-size: 0.78rem; color: var(--text-cream-muted); line-height: 1.5; margin-bottom: 14px;">Descubre cómo el fuego vivo, la maduración dry-aged y las técnicas de autor se unen bajo el liderazgo del Chef Mateo Valenzuela.</p>
+              <button class="btn-secondary-outline" style="width: 100%; justify-content: center;" onclick="app.switchTab('about')">
+                <span>Conocer Nuestra Historia</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Banner de llamada al pedido -->
+        <div style="padding: 0 18px 24px;">
+          <div style="background: linear-gradient(135deg, rgba(203,162,88,0.18) 0%, rgba(22,23,31,0.95) 100%); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center;">
+            <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--text-cream-light); margin-bottom: 6px;">Vive la Experiencia SAVORA</h3>
+            <p style="font-size: 0.8rem; color: var(--text-cream-muted); margin-bottom: 16px;">Disfruta en casa o en tu evento privado de nuestras creaciones con entrega premium y confirmación al instante por WhatsApp.</p>
+            <button class="btn-primary-gold" style="width: 100%; justify-content: center;" onclick="app.switchTab('menu')">
+              Comenzar mi Orden
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 2: MENÚ & CATÁLOGO INTERACTIVO
+           ==================================================================== -->
+      <section class="tab-view" id="view-menu">
+
+        <!-- Barra de Búsqueda y Filtros fijos -->
+        <div class="menu-controls">
+          <div class="menu-search-box">
+            <div class="search-input-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input type="text" id="menuSearchInput" class="search-input" placeholder="Buscar platillo, corte, postre o cóctel..." autocomplete="off" />
+              <button id="searchClearBtn" class="search-clear-btn" aria-label="Limpiar búsqueda">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Selector de Categorías -->
+          <div class="categories-tabs" id="categoriesTabs"></div>
+        </div>
+
+        <!-- Listado de Productos -->
+        <div class="products-section">
+          <div class="products-grid" id="productsGrid"></div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 3: FAVORITOS
+           ==================================================================== -->
+      <section class="tab-view" id="view-favorites">
+        <div class="favorites-view-wrap">
+          <div class="favs-header">
+            <span class="section-subtitle">Tu Selección Personal</span>
+            <h2 class="section-title">Platillos Favoritos</h2>
+            <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">Tus elecciones predilectas guardadas localmente en este dispositivo.</p>
+          </div>
+
+          <div class="favs-grid" id="favsListContainer"></div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 4: SOBRE NOSOTROS (HISTORIA & CHEF)
+           ==================================================================== -->
+      <section class="tab-view" id="view-about">
+        <div class="story-section" style="margin-top: 0; border-top: none;">
+          <div class="story-header">
+            <span class="story-tagline">Tradición & Vanguardia</span>
+            <h2 class="story-title">El Alma de SAVORA</h2>
+          </div>
+
+          <div class="story-media-collage">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80" alt="Salón Gourmet y Brasas de SAVORA" loading="lazy" />
+            <div class="story-badge-floating">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>Cocina a Fuego Abierto</span>
+            </div>
+          </div>
+
+          <p class="story-text">Fundado bajo la premisa de devolver a la gastronomía su esencia más pura y emocionante, SAVORA nace de la fascinación por las brasas vivas de maderas nobles, los ingredientes de origen certificado y las técnicas culinarias de vanguardia contemporánea.</p>
+
+          <p class="story-text">Cada preparación que sale de nuestra cocina abierta es un homenaje a la pasión por el fuego, a la maduración paciente de cortes Dry-Aged y al equilibrio armonioso entre texturas crujientes, aromas ahumados y reducciones de fondo profundo.</p>
+
+          <div class="chef-quote-card">
+            <p class="chef-quote">«Para nosotros la cocina no es sólo alimentar el cuerpo; es cincelar una memoria imborrable en el paladar a través de la armonía del fuego y la nobleza del producto.»</p>
+            <div class="chef-name">Mateo Valenzuela — Chef Ejecutivo</div>
+          </div>
+
+          <!-- Métricas de Excelencia -->
+          <div class="stats-grid-mobile" id="statsGrid"></div>
+
+          <!-- Imagen secundaria de técnica -->
+          <div style="margin-top: 24px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gold-border-subtle);">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Cava de vinos y ambiente exclusivo" loading="lazy" style="width: 100%; height: 180px; object-fit: cover;" />
+          </div>
+
+          <div style="margin-top: 22px;">
+            <button class="btn-primary-gold" style="width: 100%; justify-content: center;" onclick="app.switchTab('menu')">
+              <span>Explorar Nuestra Carta</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 5: CONTACTO, HORARIOS & UBICACIÓN
+           ==================================================================== -->
+      <section class="tab-view" id="view-contact">
+        <div class="contact-section-view">
+          <div class="favs-header">
+            <span class="section-subtitle">Atención & Reservas</span>
+            <h2 class="section-title">Encuéntranos</h2>
+            <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">Estamos a tu entera disposición para resolver cualquier inquietud gastronómica.</p>
+          </div>
+
+          <div class="contact-card-main">
+            <div class="contact-media-hero">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Restaurante SAVORA" loading="lazy" />
+              <div class="contact-media-badge">Terraza Panorámica</div>
+            </div>
+
+            <div class="contact-details-list">
+              <!-- Teléfono -->
+              <div class="contact-detail-row">
+                <div class="contact-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-text-box">
+                  <span class="contact-detail-title">Línea Directa</span>
+                  <a href="tel:+525584329900" class="contact-detail-val" id="contactPhone">+52 (55) 8432-9900</a>
+                </div>
+              </div>
+
+              <!-- WhatsApp -->
+              <div class="contact-detail-row">
+                <div class="contact-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                </div>
+                <div class="contact-text-box">
+                  <span class="contact-detail-title">Concierge WhatsApp</span>
+                  <a href="https://api.whatsapp.com/send?phone=525584329900&text=Hola%20SAVORA,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener" class="contact-detail-val text-gold" id="contactWhatsapp">+52 55 8432 9900</a>
+                </div>
+              </div>
+
+              <!-- Dirección -->
+              <div class="contact-detail-row">
+                <div class="contact-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="contact-text-box">
+                  <span class="contact-detail-title">Ubicación</span>
+                  <span class="contact-detail-val" id="contactAddress">Av. Paseo de las Lomas 740, Nivel 12, Ciudad de México</span>
+                </div>
+              </div>
+
+              <!-- Horarios -->
+              <div class="contact-detail-row">
+                <div class="contact-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="contact-text-box">
+                  <span class="contact-detail-title">Horario de Servicio</span>
+                  <span class="contact-detail-val" id="contactHours">Mar - Dom: 13:00 - 01:30 hrs | Lun: Cerrado</span>
+                </div>
+              </div>
+
+              <!-- Redes Sociales -->
+              <div class="social-links-row">
+                <a href="https://instagram.com" target="_blank" rel="noopener" class="btn-social-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  <span>Instagram</span>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener" class="btn-social-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  <span>Facebook</span>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=525584329900" target="_blank" rel="noopener" class="btn-social-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preguntas Frecuentes -->
+          <div class="faq-accordion-wrap">
+            <h3 class="faq-title">Preguntas Frecuentes</h3>
+            <div id="faqsAccordion"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Barra Flotante de Carrito Activo (Aparece al tener productos) -->
+    <div class="floating-order-bar" id="floatingOrderBar" onclick="app.openCart()">
+      <div class="floating-order-left">
+        <span class="floating-order-badge" id="floatingCartBadge">0</span>
+        <span class="floating-order-title">Ver mi Pedido</span>
+      </div>
+      <div class="floating-order-right">
+        <span id="floatingCartTotal">$0.00</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         BOTTOM NAVIGATION BAR (Móvil Ultra Elegante)
+         ==================================================================== -->
+    <nav class="bottom-nav-bar" aria-label="Navegación principal">
+      <button class="nav-item-btn active" data-tab-target="home" onclick="app.switchTab('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Inicio</span>
+      </button>
+
+      <button class="nav-item-btn" data-tab-target="menu" onclick="app.switchTab('menu')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M14 2v20"/><path d="M4 2v7a4 4 0 0 0 4 4v9"/>
+        </svg>
+        <span>Carta</span>
+      </button>
+
+      <button class="nav-item-btn" data-tab-target="favorites" onclick="app.switchTab('favorites')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        </svg>
+        <span>Favoritos</span>
+      </button>
+
+      <button class="nav-item-btn" data-tab-target="about" onclick="app.switchTab('about')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <span>Historia</span>
+      </button>
+
+      <button class="nav-item-btn" data-tab-target="contact" onclick="app.switchTab('contact')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span>Contacto</span>
+      </button>
+    </nav>
+
+    <!-- ====================================================================
+         BOTTOM SHEET 1: DETALLES DEL PRODUCTO CON EXTRAS
+         ==================================================================== -->
+    <div class="modal-overlay" id="productDetailModal" onclick="if(event.target === this) app.closeProductModal();">
+      <div class="bottom-sheet">
+        <div class="sheet-drag-handle-wrap" onclick="app.closeProductModal()">
+          <div class="sheet-drag-pill"></div>
+        </div>
+
+        <div class="sheet-header-actions">
+          <button class="sheet-close-btn" onclick="app.closeProductModal()" aria-label="Cerrar modal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="sheet-scroll-body">
+          <div class="sheet-media-header">
+            <img id="sheetProductImg" src="" alt="" />
+          </div>
+
+          <div class="sheet-info-content">
+            <span class="sheet-badge" id="sheetBadge">Exclusivo</span>
+            <h2 class="sheet-product-title" id="sheetTitle"></h2>
+            <p class="sheet-product-desc" id="sheetDesc"></p>
+
+            <div class="sheet-details-chips">
+              <div class="sheet-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="sheetPrepTime">15 min</span>
+              </div>
+              <div class="sheet-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/></svg>
+                <span id="sheetCalories">450 kcal</span>
+              </div>
+            </div>
+
+            <!-- Contenedor dinámico de extras -->
+            <div id="sheetExtrasContainer"></div>
+
+            <!-- Notas especiales -->
+            <div class="sheet-notes-block">
+              <label for="sheetSpecialNotes" class="notes-label">Notas e Instrucciones para Cocina</label>
+              <textarea id="sheetSpecialNotes" class="notes-textarea" placeholder="Ej: Término medio, sin cebolla, aderezo aparte..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer con selector de cantidad y botón de agregar -->
+        <div class="sheet-footer">
+          <div class="qty-stepper">
+            <button class="stepper-btn" onclick="app.changeModalQty(-1)">−</button>
+            <span class="stepper-val" id="modalQtyVal">1</span>
+            <button class="stepper-btn" onclick="app.changeModalQty(1)">+</button>
+          </div>
+
+          <button class="btn-add-to-cart-submit" id="btnAddModalSubmit" onclick="app.submitProductModal()">
+            <span>Agregar al pedido</span>
+            <span>$0.00</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         BOTTOM SHEET 2: CARRITO DE COMPRAS DESLIZABLE
+         ==================================================================== -->
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-backdrop" onclick="app.closeCart()"></div>
+
+      <div class="cart-panel">
+        <div class="cart-panel-header">
+          <div class="cart-header-title">
+            <h3>Tu Pedido</h3>
+            <span class="cart-header-count" id="cartDrawerCount">0 items</span>
+          </div>
+
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button class="btn-clear-cart" onclick="app.clearCart()">Vaciar</button>
+            <button class="sheet-close-btn" style="position: static; width: 32px; height: 32px;" onclick="app.closeCart()" aria-label="Cerrar pedido">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenedor con scroll para lista de productos en carrito -->
+        <div class="cart-items-container" id="cartItemsList"></div>
+
+        <!-- Footer del carrito con desglose y botón a checkout -->
+        <div class="cart-panel-footer" id="cartDrawerFooter">
+          <div class="order-calc-breakdown">
+            <div class="calc-row">
+              <span>Subtotal</span>
+              <span id="cartSubtotalVal">$0.00</span>
+            </div>
+            <div class="calc-row" id="cartDeliveryRow">
+              <span>Envío Térmico Especializado</span>
+              <span id="cartDeliveryFeeVal">$65.00</span>
+            </div>
+            <div class="calc-row total-row">
+              <span>Total Estimado</span>
+              <span class="total-amount" id="cartTotalVal">$0.00</span>
+            </div>
+          </div>
+
+          <button class="btn-proceed-checkout" onclick="app.openCheckoutModal()">
+            <span>Finalizar y Ordenar</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         BOTTOM SHEET 3: CHECKOUT Y CONFIRMACIÓN POR WHATSAPP
+         ==================================================================== -->
+    <div class="modal-overlay" id="checkoutModal" onclick="if(event.target === this) app.closeCheckoutModal();">
+      <div class="bottom-sheet" style="max-height: 92vh;">
+        <div class="sheet-drag-handle-wrap" onclick="app.closeCheckoutModal()">
+          <div class="sheet-drag-pill"></div>
+        </div>
+
+        <div class="sheet-header-actions">
+          <button class="sheet-close-btn" onclick="app.closeCheckoutModal()" aria-label="Cerrar checkout">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="sheet-scroll-body" style="padding: 16px 20px 24px;">
+          <h2 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-cream-light); margin-bottom: 4px;">Datos de Entrega</h2>
+          <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 16px;">Selecciona la modalidad para procesar tu orden con nuestro Concierge.</p>
+
+          <!-- Selector de Modalidad -->
+          <div class="checkout-order-type-tabs">
+            <button class="order-type-tab-btn active" id="btnOrderDelivery" onclick="app.setCheckoutOrderType('delivery')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>A Domicilio</span>
+            </button>
+            <button class="order-type-tab-btn" id="btnOrderPickup" onclick="app.setCheckoutOrderType('pickup')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              <span>Para Recoger</span>
+            </button>
+          </div>
+
+          <!-- Formulario de Datos -->
+          <form class="checkout-form" onsubmit="event.preventDefault(); app.submitWhatsAppOrder();">
+            <div class="form-field-group">
+              <label class="form-label" for="checkoutClientName">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Nombre Completo *</span>
+              </label>
+              <input type="text" id="checkoutClientName" class="form-input" placeholder="Ej: Santiago Albarrán" required />
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label" for="checkoutClientPhone">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>Teléfono de Contacto *</span>
+              </label>
+              <input type="tel" id="checkoutClientPhone" class="form-input" placeholder="Ej: 55 1234 5678" required />
+            </div>
+
+            <!-- Dirección de entrega (dinámica) -->
+            <div class="form-field-group delivery-address-group" id="checkoutAddressGroup">
+              <label class="form-label" for="checkoutClientAddress">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Dirección Completa de Entrega *</span>
+              </label>
+              <input type="text" id="checkoutClientAddress" class="form-input" placeholder="Calle, número, colonia, código postal y referencias" />
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label" for="checkoutClientObs">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span>Observaciones Generales</span>
+              </label>
+              <input type="text" id="checkoutClientObs" class="form-input" placeholder="Ej: ¿Requiere cubiertos biodegradables? ¿Factura?" />
+            </div>
+
+            <!-- Resumen rápido de la orden -->
+            <div class="order-summary-box">
+              <div class="summary-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                <span>Resumen de Productos</span>
+              </div>
+              <div class="summary-items-preview" id="checkoutSummaryItems"></div>
+              <div style="display: flex; justify-content: space-between; font-weight: 800; color: var(--gold-light); font-size: 0.95rem; margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(203,162,88,0.25);">
+                <span>Total a Confirmar</span>
+                <span id="checkoutSummaryTotal">$0.00</span>
+              </div>
+            </div>
+
+            <!-- Botón WhatsApp -->
+            <button type="submit" class="btn-send-whatsapp-order">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              <span>Enviar Pedido a WhatsApp</span>
+            </button>
+            <p class="whatsapp-notice">Al presionar, se abrirá WhatsApp con el formato detallado de tu orden listo para confirmar en vivo.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
